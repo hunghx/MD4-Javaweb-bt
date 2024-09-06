@@ -8,6 +8,6 @@
 
 <a href="TodoServlet?action=GETALL">Quản lí công việc</a>
 
-
+<input type="radio" name="" id="" checked>
 </body>
 </html>

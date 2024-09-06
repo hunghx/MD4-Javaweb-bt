@@ -44,9 +44,41 @@ public class TodoServlet extends HttpServlet {
                     // hiển thị form thêm mới
                     showFormAdd(response);
                     break;
+                case "EDIT":
+                    // lấy id ra
+                    int idEdit = Integer.parseInt(request.getParameter("id"));
+                    showFormEdit(response,idEdit);
+                    break;
             }
         }
 
+    }
+    // hiển thị thông tin cũ ra form edit
+    protected void showFormEdit(HttpServletResponse response,int id) throws IOException {
+        response.setContentType("text/html");
+        // tiếng việt ở respone trả về
+        response.setCharacterEncoding("UTF-8");
+        // tạo biê lưu trữ chuô html cần hiển thị trong tbody
+        // lọc thông tin của công việc cần sửa
+        Todo todoEdit = todoList.stream().filter(t->t.getId()==id).findFirst().orElse(null);
+        if(todoEdit!=null) {
+            PrintWriter out = response.getWriter();
+            out.println("<html><body>");
+            out.println("<h1>Them moi cong viec</h1>");
+
+            out.println("<form action=\"TodoServlet\" method=\"post\">\n" +
+                    "  <label for=\"id\">ID</label>\n" +
+                    "  <input type=\"text\" value=\""+todoEdit.getId()+"\" name=\"id\" id=\"id\" readOnly> <br>\n" +
+                    "  <label for=\"content\">Nội dung công việc</label>\n" +
+                    "  <input type=\"text\" value=\""+todoEdit.getContent()+"\" name=\"content\" id=\"content\"> <br>\n" +
+                    "  <label for=\"status\">Trạng thái</label>\n" +
+                    "  <input type=\"radio\" "+(todoEdit.isStatus()?"checked":"")+" value=\"true\" name=\"status\"> Xong" +
+                    "  <input type=\"radio\" "+(!todoEdit.isStatus()?"checked":"")+" value=\"false\" name=\"status\" > Chưa xong" +
+                    " <br>\n" +
+                    "  <input type=\"submit\" name=\"action\" value=\"UPDATE\">\n" +
+                    "</form>");
+            out.println("</body></html>");
+        }
     }
     // hiển thị form thêm mới
     protected void showFormAdd(HttpServletResponse response) throws IOException {
@@ -88,7 +120,7 @@ public class TodoServlet extends HttpServlet {
                     "    <td>"+todo.getContent()+"</td>\n" +
                     "    <td>"+(todo.isStatus()?"Xong":"Chưa xong")+"</td>\n" +
                     "    <td><a href=\"TodoServlet?action=DELETE&id="+todo.getId()+"\">Xóa</a></td>\n" +
-                    "    <td><a>Sửa</a></td>\n" +
+                    "    <td><a href=\"TodoServlet?action=EDIT&id="+todo.getId()+"\">Sửa</a></td>\n" +
                     "  </tr>\n";
         }
         // Hello
