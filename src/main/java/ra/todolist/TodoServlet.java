@@ -162,7 +162,23 @@ public class TodoServlet extends HttpServlet {
                     // hien thi lai danh sach
                     displayTodoList(response);
                     break;
+                case "UPDATE":
+                    doUpdateTodo(request);
+                    displayTodoList(response);
+                    break;
             }
+        }
+    }
+    // xử lí cạp nhật
+    protected void doUpdateTodo(HttpServletRequest request) throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String content = request.getParameter("content");
+        boolean status = Boolean.parseBoolean(request.getParameter("status"));
+        Todo old = todoList.stream().filter(t-> t.getId() ==id).findFirst().orElse(null);
+        if (old!=null){
+            //cho phép cập nhật
+            old.setContent(content);
+            old.setStatus(status);
         }
     }
     // xử lí thêm mới
