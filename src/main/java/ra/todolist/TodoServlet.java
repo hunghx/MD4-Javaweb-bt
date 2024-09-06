@@ -6,6 +6,7 @@ import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @WebServlet(name = "TodoServlet", value = "/TodoServlet")
@@ -39,10 +40,32 @@ public class TodoServlet extends HttpServlet {
                     // hiển thị lại giao diện
                     displayTodoList(response);
                     break;
+                case "ADD":
+                    // hiển thị form thêm mới
+                    showFormAdd(response);
+                    break;
             }
         }
 
     }
+    // hiển thị form thêm mới
+    protected void showFormAdd(HttpServletResponse response) throws IOException {
+        response.setContentType("text/html");
+        // tiếng việt ở respone trả về
+        response.setCharacterEncoding("UTF-8");
+        // tạo biê lưu trữ chuô html cần hiển thị trong tbody
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Them moi cong viec</h1>");
+
+        out.println("<form action=\"TodoServlet\" method=\"post\">\n" +
+                "  <label for=\"content\">Nội dung công việc</label>\n" +
+                "  <input type=\"text\" name=\"content\" id=\"content\"> <br>\n" +
+                "  <input type=\"submit\" name=\"action\" value=\"ADD\">\n" +
+                "</form>");
+        out.println("</body></html>");
+    }
+
     // hàm xóa theo id
     protected void deleteById(int idDel){
         // lấy đối tượng todo cần xóa
@@ -63,7 +86,7 @@ public class TodoServlet extends HttpServlet {
             htmlBody+=   "  <tr>\n" +
                     "    <td>"+todo.getId()+"</td>\n" +
                     "    <td>"+todo.getContent()+"</td>\n" +
-                    "    <td>"+(todo.isStatus()?"XOng":"Chưa xong")+"</td>\n" +
+                    "    <td>"+(todo.isStatus()?"Xong":"Chưa xong")+"</td>\n" +
                     "    <td><a href=\"TodoServlet?action=DELETE&id="+todo.getId()+"\">Xóa</a></td>\n" +
                     "    <td><a>Sửa</a></td>\n" +
                     "  </tr>\n";
@@ -71,6 +94,8 @@ public class TodoServlet extends HttpServlet {
         // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
+        out.println("<h1>Danh sach cong viec</h1>");
+        out.println("<a href=\"TodoServlet?action=ADD\">+ Thêm mơi công việc</a>");
         out.println("<table border=\"10\" cellspacing=\"0\" cellpadding=\"15\">\n" +
                 "  <thead>\n" +
                 "  <tr>\n" +
@@ -89,6 +114,40 @@ public class TodoServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+       request.setCharacterEncoding("UTF-8");
+        // nhận thông tin gửi theo post
+        // dựa vào action  để phân chia chức năng
+        // lấy 1 tham số theo name : getParameter
+        String action = request.getParameter("action");
 
+        if (action!=null) {
+            switch (action) {
+
+                case "ADD":
+                    // hiển thị form thêm mới
+                    // lấy nội dung trong  input và tạo mới todo
+                    doAddTodo(request);
+                    // hien thi lai danh sach
+                    displayTodoList(response);
+                    break;
+            }
+        }
+    }
+    // xử lí thêm mới
+    protected void doAddTodo(HttpServletRequest request) throws ServletException, IOException {
+        // lấy ra content
+        String content = request.getParameter("content");
+        // tạo todo
+        Todo newTodo = new Todo(getNewId(),content,false);
+        // them vao danh sach
+        todoList.add(newTodo);
+    }
+    // id tự tăng
+    protected int getNewId(){
+        int idMax = todoList.stream()
+                .max(Comparator.comparingInt(Todo::getId))
+                .orElse(new Todo())
+                .getId();
+        return idMax+1;
     }
 }
