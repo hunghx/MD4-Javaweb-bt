@@ -9,13 +9,23 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%-- chuyển trang tự động --%>
-<%response.sendRedirect("/TodoServlet?action=GETALL");%>
+<%--<%response.sendRedirect("/TodoServlet?action=GETALL");%>--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Title</title>
 </head>
 <body>
+
+<%--Form upload --%>
+
+<form action="/UploadServlet" method="post" enctype="multipart/form-data">
+    <input type="file" name="file" id="file">
+    <input type="file" name="files" id="files" multiple>
+    <button type="submit">upload</button>
+</form>
+
+
 <%--Khai báo biê và khởi ta giá trị--%>
 <%!
     LocalDate today = LocalDate.now();
