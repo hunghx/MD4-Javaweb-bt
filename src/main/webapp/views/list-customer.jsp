@@ -13,6 +13,7 @@
 </head>
 <body>
 <h1>Danh sách khách hàng</h1>
+<a href="/views/add-customer.jsp">+ Them moi khach hang</a>
 <table border="10" cellspacing="10" cellpadding="10">
     <thead>
     <tr>
@@ -30,8 +31,8 @@
         <tr>
             <td>${loop.count}</td>
             <td>${cus.name}</td>
-            <td><a href="">Details</a></td>
-            <td><a href="">Edit</a></td>
+            <td><a href="/customers?action=DETAIL&id=${cus.id}">Details</a></td>
+            <td><a href="/customers?action=EDIT&id=${cus.id}">Edit</a></td>
             <td><a href="/customers?action=DELETE&id=${cus.id}">Delete</a></td>
         </tr>
     </c:forEach>
