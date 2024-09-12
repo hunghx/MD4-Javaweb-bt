@@ -17,6 +17,6 @@
 </head>
 <body>
 
-<a href="/customers?action=GETALL">Danh sách khách hàng</a>
+<a href="/views/login.jsp">Đăng nhập</a>
 </body>
 </html>
