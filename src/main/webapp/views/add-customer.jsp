@@ -12,7 +12,7 @@
 </head>
 <body>
 <h1>Theem moi khach hang</h1>
-<form action="/customers" method="post">
+<form action="/customers/add" method="post">
     <div>
         <label for="name">Name</label>
         <input type="text" name="name" id="name">
@@ -25,7 +25,7 @@
         <label for="email">Email</label>
         <input type="email" name="email" id="email">
     </div>
-    <input type="submit" name="action" value="ADD">
+    <input type="submit" value="ADD">
 </form>
 </body>
 </html>

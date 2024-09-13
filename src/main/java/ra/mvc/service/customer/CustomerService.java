@@ -1,5 +1,6 @@
 package ra.mvc.service.customer;
 
+import org.springframework.stereotype.Service;
 import ra.mvc.model.Customer;
 
 import java.util.ArrayList;
@@ -7,6 +8,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+@Service
 public class CustomerService implements ICustomerService {
     private List<Customer> list = new ArrayList<>();
 
