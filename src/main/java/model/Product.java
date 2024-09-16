@@ -1,4 +1,4 @@
-package ra.mvc.model;
+package model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -9,9 +9,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class Customer {
+public class Product {
     private int id;
     private String name;
-    private String address;
-    private String email;
+    private String description;
+    private int price;
+    private String url;
 }
