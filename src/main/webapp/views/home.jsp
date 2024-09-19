@@ -1,3 +1,4 @@
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%--
   Created by IntelliJ IDEA.
   User: AD
@@ -12,8 +13,23 @@
 </head>
 <body>
 <h1>CHào mưng den trang chu</h1>
-<form>
+<a href="/upload">Upload</a>
+<form:form action="/doAdd" method="post" modelAttribute="person">
+    <form:label path="id">Id</form:label>
+    <form:input path="id"/> <br>
+    <form:label path="name">Name</form:label>
+    <form:input path="name"/> <br>
+    <form:label path="age">age</form:label>
+    <form:input type="number" path="age"/><br>
+    <%--    checkbox, checkboxes--%>
+    <form:checkbox path="checkbox" value="Banana"/><form:label path="checkbox">Quả chuối</form:label>
+    <form:checkboxes path="checkboxes" items="${listcheck}" element="div"/>
 
-</form>
+<%--    select - option--%>
+    <form:select path="select">
+        <form:options items="${listcheck}"/>
+    </form:select>
+    <button type="submit">Add</button>
+</form:form>
 </body>
 </html>
