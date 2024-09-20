@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--header đc nhúng-->
+<header th:replace="~{layout :: head}"></header>
+<main th:replace="~{layout :: content}"></main>
+<div>Phần phân trang</div>
+<footer th:replace="~{layout :: foot}"></footer>
+
+</body>
+</html>

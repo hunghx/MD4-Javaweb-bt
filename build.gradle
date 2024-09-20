@@ -26,7 +26,8 @@ dependencies {
   // https://mvnrepository.com/artifact/javax.servlet/jstl
   compileOnly 'org.projectlombok:lombok:1.18.8'
   annotationProcessor 'org.projectlombok:lombok:1.18.8'
-  implementation 'javax.servlet:jstl:1.2'
+  // https://mvnrepository.com/artifact/org.thymeleaf/thymeleaf-spring5
+  implementation 'org.thymeleaf:thymeleaf-spring5:3.1.2.RELEASE'
   // https://mvnrepository.com/artifact/org.springframework/spring-webmvc
   implementation 'org.springframework:spring-webmvc:5.3.18'
 // https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload

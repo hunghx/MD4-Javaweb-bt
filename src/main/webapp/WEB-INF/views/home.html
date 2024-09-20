@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>Home</h1>
+<!--&lt;!&ndash;Cú pháp thymeleaf&ndash;&gt;-->
+<!--&lt;!&ndash;-->
+<!--c1 : ${biểu thức}-->
+<!--c2 : *{thuộc tính của 1 object}-->
+<!--c3 : #{thông điêp - file c hình dưới dạng .properties}-->
+<!--c4 : @{URL}-->
+<!--c5 : ~{Fragment}-->
+<!--&#45;&#45; >-->
+
+<!--HIển thị văn bản-->
+<p th:text="|Tôi tên là ${name}, Năm nay tôi ${age} tuổi|">Tôi tên là name, Năm nay tôi age tuổi</p>
+<p th:text="${'Tôi tên là '+name+', Năm nay tôi '+age+' tuổi'}">Tôi tên là name, Năm nay tôi age tuổi</p>
+<!--HIển thị html-->
+<p th:utext="${html}">HTML</p>
+<!--Vòng lặp duyệt mảng   : forEach (int a : array)-->
+<th:block th:each="num,loop : ${arr}">
+<!--    thẻ rỗng   -->
+    <li th:id="${loop.count}" th:text="${num}"></li>
+</th:block>
+<!-- for i : 5 lần lặp "tạo 1 mang 5 phàn tư sau đó duyệt mảng"-->
+<th:block th:each="num,loop : ${#numbers.sequence(1,5)}">
+    <!--    thẻ rỗng   -->
+    <li th:text="|${num} - ${loop.index}|"></li>
+</th:block>
+<!-- câu lệnh đều kiện-->
+<p th:if="${age>=18}">Đủ tuổi</p>
+<p th:unless="${age>=18}">Chưa đủ tuổi</p>
+<!-- switch case -->
+<th:block th:switch="${age}">
+    <a href="" th:case="18">tuổi thành niên</a>
+    <a href="" th:case="11">vi thành niêm</a>
+    <a href="" th:case="30">thanh niên</a>
+    <a href="" th:case="*">không xác định</a>
+</th:block>
+
+</body>
+</html>
