@@ -1,13 +1,19 @@
 package ra.mvc.service.customer;
 
-import ra.mvc.dao.customer.CustomerDao;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import ra.mvc.dao.customer.ICustomerDao;
-import ra.mvc.model.Customer;
+import ra.mvc.model.entity.Customer;
 
+import javax.transaction.Transactional;
+import java.util.Collections;
 import java.util.List;
 
-public class CustomerService implements ICustomerService {
-    private ICustomerDao customerDao = new CustomerDao();
+@Service
+public class CustomerService implements ICustomerService{
+    @Autowired
+    private ICustomerDao customerDao;
+
     @Override
     public List<Customer> findAll() {
         return customerDao.findAll();
@@ -15,19 +21,21 @@ public class CustomerService implements ICustomerService {
 
     @Override
     public Customer findById(Integer id) {
-        return  customerDao.findById(id);
+        return customerDao.findById(id);
     }
 
     @Override
+    @Transactional
     public void save(Customer customer) {
-        if (findById(customer.getId())!=null){
-            customerDao.update(customer);
-        }else {
+        if(customer.getId()==null) {
             customerDao.create(customer);
+        }else {
+            customerDao.update(customer);
         }
     }
 
     @Override
+    @Transactional
     public void delete(Integer id) {
         customerDao.delete(id);
     }
