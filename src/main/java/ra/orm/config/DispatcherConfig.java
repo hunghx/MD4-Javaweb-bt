@@ -1,4 +1,4 @@
-package ra.mvc.config;
+package ra.orm.config;
 
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;

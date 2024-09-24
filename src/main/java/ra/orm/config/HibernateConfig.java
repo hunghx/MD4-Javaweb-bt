@@ -1,4 +1,4 @@
-package ra.mvc.config;
+package ra.orm.config;
 
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
@@ -46,7 +46,7 @@ public class HibernateConfig {
                 new LocalContainerEntityManagerFactoryBean();
 
         entityManagerFactory.setDataSource(dataSource());
-        entityManagerFactory.setPackagesToScan("ra.mvc.model.entity");
+        entityManagerFactory.setPackagesToScan("ra.orm.model.entity");
         JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         entityManagerFactory.setJpaVendorAdapter(vendorAdapter);
         entityManagerFactory.setJpaProperties(additionalProperties());

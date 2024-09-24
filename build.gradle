@@ -38,6 +38,9 @@ dependencies {
   implementation 'org.hibernate:hibernate-entitymanager:5.4.2.Final'
   // https://mvnrepository.com/artifact/org.springframework/spring-orm
   implementation 'org.springframework:spring-orm:5.3.18'
+// https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa
+  implementation 'org.springframework.data:spring-data-jpa:2.4.2'
+
 
   testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
   testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
