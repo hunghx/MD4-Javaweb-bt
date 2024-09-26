@@ -5,6 +5,28 @@
     <title>Title</title>
 </head>
 <body>
- <h1>Home</h1>
+<!--<h1 th:text="|Bạn  truy cập trang web nay ${count} lần |"></h1>-->
+<select id="selected">
+    <option value="vi">Tiếng việt</option>
+    <option value="en"> Tiếng anh</option>
+    <option value="lo">Tiếng Lao</option>
+    <option value="ja">Tiếng Nhật</option>
+    <option>Tiếng Hàn</option>
+    <option>Tiếng Trung</option>
+</select>
+<h2 th:text="#{app.content}">Nội dung văn bản tương ứng của mỗi quốc gia</h2>
+
+<script>
+    let select = document.getElementById("selected");
+    select.addEventListener("change",function (e){
+        let valueOptions = e.target.value;
+        location.href  = "http://localhost:8080?lang="+valueOptions
+    })
+
+
+    let href = location.href;
+    let lang = href.split("?lang=")[1];
+    select.value = lang;
+</script>
 </body>
 </html>
